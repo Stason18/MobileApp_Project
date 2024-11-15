@@ -1,0 +1,23 @@
+name: CI Test &amp; Deploy
+on:
+  push:
+    branches:["actions_test_student8"]
+
+  pull_request:
+    branches:["actions_test_student8"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+        java-version: '11'
+
+      - name: Build with Gradle
+        run: ./gradlew build
+      - name: Run Unit Tests
+        run: ./gradlew test
